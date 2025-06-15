@@ -8,6 +8,21 @@
   "alpaca_zh_demo": {
     "file_name": "alpaca_zh_demo.json"
   },
+  "alpaca_data": {
+    "file_name": "alpaca_data.json"
+  },
+  "ukb_mdd": {
+    "file_name": "ukb_mdd.json"
+  },
+  "ukb_mdd_train": {
+    "file_name": "ukb_mdd_train.json"
+  },
+  "ukb_mdd_test": {
+    "file_name": "ukb_mdd_test.json"
+  },
+  "ukb_mdd_test_eval": {
+    "file_name": "ukb_mdd_test_eval.json"
+  },
   "glaive_toolcall_en_demo": {
     "file_name": "glaive_toolcall_en_demo.json",
     "formatting": "sharegpt",
@@ -58,21 +73,6 @@
     "columns": {
       "messages": "messages",
       "videos": "videos"
-    },
-    "tags": {
-      "role_tag": "role",
-      "content_tag": "content",
-      "user_tag": "user",
-      "assistant_tag": "assistant"
-    }
-  },
-  "mllm_video_audio_demo": {
-    "file_name": "mllm_video_audio_demo.json",
-    "formatting": "sharegpt",
-    "columns": {
-      "messages": "messages",
-      "videos": "videos",
-      "audios": "audios"
     },
     "tags": {
       "role_tag": "role",
@@ -247,7 +247,6 @@
   "ultrachat_200k": {
     "hf_hub_url": "HuggingFaceH4/ultrachat_200k",
     "ms_hub_url": "AI-ModelScope/ultrachat_200k",
-    "split": "train_sft",
     "formatting": "sharegpt",
     "columns": {
       "messages": "messages"
@@ -274,7 +273,7 @@
     "tags": {
       "role_tag": "role",
       "content_tag": "content",
-      "user_tag": "user",
+      "user_tag": "human",
       "assistant_tag": "assistant"
     }
   },
@@ -527,16 +526,6 @@
       "rejected": "rejected"
     }
   },
-  "coig_p": {
-    "hf_hub_url": "m-a-p/COIG-P",
-    "ranking": true,
-    "formatting": "sharegpt",
-    "columns": {
-      "messages": "conversations",
-      "chosen": "chosen",
-      "rejected": "rejected"
-    }
-  },
   "rlhf_v": {
     "hf_hub_url": "llamafactory/RLHF-V",
     "ranking": true,
@@ -557,16 +546,6 @@
       "chosen": "chosen",
       "rejected": "rejected",
       "images": "images"
-    }
-  },
-  "rlaif_v": {
-    "hf_hub_url": "openbmb/RLAIF-V-Dataset",
-    "ranking": true,
-    "columns": {
-      "prompt": "question",
-      "chosen": "chosen",
-      "rejected": "rejected",
-      "images": "image"
     }
   },
   "orca_pairs": {
@@ -642,7 +621,7 @@
     }
   },
   "c4_demo": {
-    "file_name": "c4_demo.jsonl",
+    "file_name": "c4_demo.json",
     "columns": {
       "prompt": "text"
     }
