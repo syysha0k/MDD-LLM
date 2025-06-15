@@ -151,11 +151,6 @@ def generate_id_prompt(csv_rec, ratio=1.0):
         # add shuffle element
         # random.shuffle(sentence_list)
 
-        ## ################################
-        # ratio selection for AB test
-        if ratio < 1.0:
-            sentence_list = random.sample(sentence_list, int(ratio * len(sentence_list)))
-
         temp_sentence = ','.join(sentence_list)
         prompt_line.append(temp_sentence)
 
@@ -183,11 +178,6 @@ def build_json(prompt_lines, labels=None, json_path=None):
     prompt_line_mdd, prompt_line_hc = prompt_lines
     label_mdd, label_hc = labels
 
-    # prob_mdd = random.uniform(90.00, 100.00)
-    # prob_hc = random.uniform(90.00, 100.00)
-    # label_mdd = '{},{}%'.format(label_mdd, str(prob_mdd))
-    # label_hc = '{},{}%'.format(label_hc, str(prob_hc))
-
     for idx, line in tqdm(enumerate(prompt_line_mdd)):
         line = line.capitalize()
         # temp_dict = {
@@ -195,7 +185,6 @@ def build_json(prompt_lines, labels=None, json_path=None):
         #     "input": line,
         #     "output": label_mdd,
         # }
-        prob_mdd = round(random.uniform(92.00, 100.00), 2)
         label_mdd_temp = '{},{}%'.format(label_mdd, str(prob_mdd))
 
         temp_dict = {
@@ -209,25 +198,12 @@ def build_json(prompt_lines, labels=None, json_path=None):
             "input": line,
             "output": label_mdd_temp,
         }
-        # temp_dict = {
-        #     "instruction": "Predict if a patient has the major depressive disorder? Yes or no? Please answer with only yes or no and corresponding probability",
-        #     "input": line,
-        #     "output": label_mdd,
-        # }
+
         if idx % 10 == 0:
             temp_mdd_test.append(temp_dict)
         else:
             temp_mdd_train.append(temp_dict)
 
-
-    ## Predict if a patient has the major depressive disorder? Yes or no? Please answer with "yes" or "no" and give corresponding probability.
-    ## Please answer exactly in the format below, without blank lines and no further information or answer is required.
-    ## {Yes or No} @ (in percentages, round to two decimal place)
-    ## For example: No @ 82.32%
-
-    # random select
-    prompt_line_hc_select = random.sample(prompt_line_hc, int(1.3 * len(prompt_line_mdd)))
-    ## add some test sample
 
     # generate hc json
     for idx, line in tqdm(enumerate(prompt_line_hc_select)):
@@ -237,7 +213,6 @@ def build_json(prompt_lines, labels=None, json_path=None):
         #     "input": line,
         #     "output": label_hc,
         # }
-        prob_hc = round(random.uniform(92.00, 100.00), 2)
         label_hc_temp = '{},{}%'.format(label_hc, str(prob_hc))
 
         temp_dict = {
@@ -295,8 +270,8 @@ if __name__ == '__main__':
     csv_path_hc = './data_save/extract_hc.csv'
 
     ratio = 0.8
-    json_path_train = './data_save/15-ratio/prompt_all_train_{}.json'.format(ratio)
-    json_path_test = './data_save/15-ratio/prompt_all_test_test_{}.json'.format(ratio)
+    json_path_train = './data_save/ratio/prompt_all_train_{}.json'.format(ratio)
+    json_path_test = './data_save/ratio/prompt_all_test_{}.json'.format(ratio)
 
     csv_rec_mdd = load_csv(csv_path_mdd)
     prompt_line_mdd = generate_id_prompt(csv_rec_mdd, ratio=ratio)
