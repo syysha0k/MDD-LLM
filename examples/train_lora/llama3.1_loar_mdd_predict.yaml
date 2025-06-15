@@ -1,0 +1,38 @@
+### model
+# model_name_or_path: /home/shayuyang/.cache/modelscope/hub/models/LLM-Research/Meta-Llama-3-8B-Instruct
+model_name_or_path: /home/shayuyang/workspace/LLaMA-Factory/weight/Meta-Llama-3.1-8B-Instruct
+adapter_name_or_path: ./saves/llama3-8b/lora/sft_ds2_13_lm31-os18
+trust_remote_code: true
+
+
+### method
+stage: sft
+do_predict: true
+finetuning_type: lora
+predict_with_generate: true
+# lora_rank: 8
+# lora_target: all
+# deepspeed: examples/deepspeed/ds_z2_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
+
+
+### eval
+# eval_dataset: ukb_mdd_test
+eval_dataset: ukb_mdd_test_eval
+per_device_eval_batch_size: 8
+eval_strategy: steps
+eval_steps: 500
+preprocessing_num_workers: 16
+cutoff_len: 2048
+overwrite_cache: true
+template: llama3
+
+
+### output
+output_dir: saves/llama3-8b/lora/pred_02_sft_ds2_13_lm31-os18
+logging_steps: 10
+save_steps: 500
+plot_loss: true
+overwrite_output_dir: true
+# save_only_model: false
+
+
